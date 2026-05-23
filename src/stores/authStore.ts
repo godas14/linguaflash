@@ -1,28 +1,29 @@
-import { create } from 'zustand'
-import { supabase } from '../lib/supabase'
-import type { User } from '@supabase/supabase-js'
+import { create } from "zustand";
+import { supabase } from "../lib/supabase";
+import type { User } from "@supabase/supabase-js";
 
 interface Profile {
-  id: string
-  username: string
-  display_name: string | null
-  avatar_url: string | null
-  xp: number
-  level: number
-  streak: number
-  last_study_date: string | null
-  created_at: string
+  id: string;
+  username: string;
+  display_name: string | null;
+  avatar_url: string | null;
+  xp: number;
+  level: number;
+  streak: number;
+  last_study_date: string | null;
+  created_at: string;
 }
 
 interface AuthState {
-  user: User | null
-  profile: Profile | null
-  loading: boolean
-  signUp: (email: string, password: string, username: string) => Promise<void>
-  signIn: (email: string, password: string) => Promise<void>
-  signOut: () => Promise<void>
-  fetchProfile: () => Promise<void>
-  initialize: () => Promise<void>
+  user: User | null;
+  profile: Profile | null;
+  loading: boolean;
+  signUp: (email: string, password: string, username: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  fetchProfile: () => Promise<void>;
+  updateProfile: (updates: Partial<Profile>) => void;
+  initialize: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -32,28 +33,30 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   initialize: async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession()
-      
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
       if (session?.user) {
-        set({ user: session.user })
-        await get().fetchProfile()
+        set({ user: session.user });
+        await get().fetchProfile();
       }
     } catch (error) {
-      console.error('Initialize error:', error)
+      console.error("Initialize error:", error);
     } finally {
-      set({ loading: false })
+      set({ loading: false });
     }
 
     // Listen for auth changes
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      set({ user: session?.user ?? null })
-      
+    supabase.auth.onAuthStateChange(async (_event, session) => {
+      set({ user: session?.user ?? null });
+
       if (session?.user) {
-        await get().fetchProfile()
+        await get().fetchProfile();
       } else {
-        set({ profile: null })
+        set({ profile: null });
       }
-    })
+    });
   },
 
   signUp: async (email: string, password: string, username: string) => {
@@ -66,13 +69,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           display_name: username,
         },
       },
-    })
+    });
 
-    if (error) throw error
-    
+    if (error) throw error;
+
     if (data.user) {
-      set({ user: data.user })
-      await get().fetchProfile()
+      set({ user: data.user });
+      await get().fetchProfile();
     }
   },
 
@@ -80,38 +83,45 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
+    });
 
-    if (error) throw error
-    
+    if (error) throw error;
+
     if (data.user) {
-      set({ user: data.user })
-      await get().fetchProfile()
+      set({ user: data.user });
+      await get().fetchProfile();
     }
   },
 
   signOut: async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-    
-    set({ user: null, profile: null })
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+
+    set({ user: null, profile: null });
   },
 
   fetchProfile: async () => {
-    const { user } = get()
-    if (!user) return
+    const { user } = get();
+    if (!user) return;
 
     const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .single()
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
 
     if (error) {
-      console.error('Fetch profile error:', error)
-      return
+      console.error("Fetch profile error:", error);
+      return;
     }
 
-    set({ profile: data })
+    set({ profile: data });
   },
-}))
+
+  updateProfile: (updates: Partial<Profile>) => {
+    const { profile } = get();
+    if (!profile) return;
+
+    set({ profile: { ...profile, ...updates } });
+  },
+}));

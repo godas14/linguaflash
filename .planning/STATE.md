@@ -1,9 +1,9 @@
 # LinguaFlash — Project State
 
 ## Current Status
-**Phase:** Phase 3 Complete ✅  
+**Phase:** Phase 5 Complete ✅  
 **Date:** 2026-05-23  
-**Next Action:** Begin Phase 4 (Classic Flashcards Study Mode)
+**Next Action:** Begin Phase 6 (Quiz & Type Modes)
 
 ## Completed Phases
 
@@ -30,38 +30,68 @@
 - DecksPage created (displays all decks)
 - Database seeded successfully
 
+### ✅ Phase 4: Classic Flashcards Study Mode
+- user_card_progress table created (tracks learning progress)
+- study_sessions table created (tracks study history)
+- DeckDetailPage created (shows all cards in deck)
+- StudySessionPage created (flashcard study interface)
+- Flashcard component with 3D flip animation
+- Self-assessment buttons (Again, Hard, Good, Easy)
+- Progress bar during study
+- Session summary with stats (cards studied, accuracy, XP, time)
+- XP calculation and awarding system
+- Database progress tracking per card
+
+### ✅ Phase 5: Spaced Repetition Optimization
+- Smart card selection algorithm (prioritizes due cards)
+- cardSelection.ts utility (getDueCards, getDueCardsCount, getDueCardsCountByDeck)
+- streakUtils.ts utility (calculateStreak, getTodayDate, hasStudiedToday)
+- DueTodayWidget component (shows cards due per deck)
+- XPChart component (7-day progress visualization)
+- Dashboard enhanced with due cards widget and XP chart
+- Streak tracking system implemented
+- Profile updates include streak and last_study_date
+- StudySessionPage updated to use smart card selection
+- Automatic streak increment/reset on daily study
+- 80/20 ratio: 80% due cards, 20% new cards
+
+## Phase 5 Results
+- **Components created:** 2 (DueTodayWidget, XPChart)
+- **Utilities created:** 2 (cardSelection.ts, streakUtils.ts)
+- **Files modified:** 2 (StudySessionPage.tsx, DashboardPage.tsx)
+- **Lines added:** ~500
+- **Features implemented:** 
+  - Smart card selection with due prioritization
+  - Streak tracking and display
+  - Due cards widget on Dashboard
+  - 7-day XP progress chart
+  - Enhanced Dashboard UI with streak highlights
+
 ## In Progress
-- 🔄 Ready to start Phase 4 (Classic Flashcards Study Mode)
+- ✅ Phase 5 Complete (Spaced Repetition Optimization)
+- 🔄 Ready to start Phase 6 (Quiz & Type Modes)
 
-## Phase 3 Results
-- **Decks created:** 5
-- **Cards created:** 500
-- **Files added:** 6
-- **Lines added:** 787
-- **Git commits:** 7 total (1 new in Phase 3)
-
-## Database Content
-- **Deck 1:** Comida y Bebidas (Food & Drinks) - 100 cards
-- **Deck 2:** Viajes y Transporte (Travel & Transport) - 100 cards
-- **Deck 3:** Vida Cotidiana (Daily Life) - 100 cards
-- **Deck 4:** Verbos Comunes (Common Verbs) - 100 cards
-- **Deck 5:** Adjetivos Comunes (Common Adjectives) - 100 cards
+## Database Schema
+- **profiles:** User data (username, xp, level, streak)
+- **decks:** 5 decks with metadata
+- **cards:** 500 Spanish-Russian flashcards
+- **user_card_progress:** Learning progress per card (state, ease_factor, interval, next_review)
+- **study_sessions:** Study history (mode, cards_studied, xp_earned, duration)
 
 ## Services Running
-- **Dev server:** http://localhost:5173
+- **Dev server:** http://localhost:5174
 - **Supabase API:** http://127.0.0.1:54321
 - **Supabase Studio:** http://127.0.0.1:54323
 - **PostgreSQL:** postgresql://postgres:postgres@127.0.0.1:54322/postgres
 
-## Next Steps (Phase 4)
-1. Create DeckDetailPage (show cards in a deck)
-2. Create StudySessionPage (flashcard study mode)
-3. Implement card flip animation
-4. Add self-assessment buttons (Again, Hard, Good, Easy)
-5. Create user_card_progress table
-6. Track study sessions
-7. Award XP for studying
-8. Update user stats after session
+## Next Steps (Phase 6)
+1. Create QuizMode component (multiple choice)
+2. Create TypeMode component (text input)
+3. Add mode selector to DeckDetailPage
+4. Implement fuzzy matching for type mode
+5. Generate distractors for quiz mode
+6. Award different XP for different modes (Quiz: +10, Type: +15)
+7. Update study_sessions to track mode
 
 **Estimated time:** 1.5 days
 
@@ -74,19 +104,21 @@
 - **Auth:** Supabase Auth (email/password)
 
 ## Project Stats
-- **Total commits:** 7
-- **Total files:** 50+
-- **Lines of code:** ~5000+
+- **Total commits:** 7+
+- **Total files:** 58+
+- **Lines of code:** ~6,100+
 - **Dependencies:** 191 packages
-- **Database tables:** 4 (profiles, decks, cards, auth.users)
+- **Database tables:** 6 (profiles, decks, cards, user_card_progress, study_sessions, auth.users)
 
 ## Decisions Made
 1. Web-first PWA (native iOS later)
 2. Local Supabase for MVP (cloud later)
 3. 500 cards A1-A2 level for MVP
-4. SM-2 spaced repetition algorithm
-5. 5 study modes (Flashcards in Phase 4, Quiz/Type in Phase 6)
-6. Gamification: XP, Levels, Streaks, Achievements
+4. SM-2 spaced repetition algorithm (Phase 5)
+5. 5 study modes (Flashcards ✅, Quiz/Type in Phase 6)
+6. Gamification: XP ✅, Levels, Streaks, Achievements
+7. 20 cards per study session
+8. XP rewards: Again=0, Hard=5, Good=10, Easy=15
 
 ## Open Questions
 - None
@@ -97,7 +129,7 @@
 2. **User Retention:** Gamification effectiveness
    - Mitigation: A/B test streak reminders post-launch
 3. **Performance:** Large card decks
-   - Mitigation: Lazy loading, pagination (Phase 4)
+   - ✅ Mitigation: Lazy loading, pagination implemented
 
 ## Notes
 - Developer is a beginner (AI handles all implementation)
@@ -105,3 +137,5 @@
 - Russian UI language support
 - All services running locally (no cloud costs)
 - GitHub: https://github.com/godas14/linguaflash
+- Phase 4 completed in ~1 hour (faster than estimated 1.5 days)
+- Phase 5 completed in ~1 hour (estimated 1 day)
