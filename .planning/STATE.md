@@ -1,9 +1,9 @@
 # LinguaFlash — Project State
 
 ## Current Status
-**Phase:** Phase 1 Complete ✅  
-**Date:** 2026-05-22  
-**Next Action:** Begin Phase 2 (Authentication System)
+**Phase:** Phase 2 Complete ✅  
+**Date:** 2026-05-23  
+**Next Action:** Begin Phase 3 (Content Foundation)
 
 ## Completed
 - ✅ Project questioning and requirements gathering
@@ -13,24 +13,64 @@
 - ✅ Git repository initialized
 - ✅ Planning directory structure created
 - ✅ **Phase 1: Project Setup & Infrastructure**
-  - ✅ React + TypeScript + Vite initialized
-  - ✅ Tailwind CSS configured
-  - ✅ React Router installed
-  - ✅ Zustand installed
-  - ✅ Supabase client installed
-  - ✅ Basic page structure created (5 pages)
-  - ✅ Landing page with hero section
-  - ✅ Login/Register forms
-  - ✅ Dashboard with stats widgets
-  - ✅ Profile page
-  - ✅ Dev server running (http://localhost:5173)
-  - ✅ README.md created
+  - React + TypeScript + Vite initialized
+  - Tailwind CSS configured
+  - React Router installed
+  - Zustand installed
+  - Supabase client installed
+  - Basic page structure created (5 pages)
+  - Landing page with hero section
+  - Login/Register forms
+  - Dashboard with stats widgets
+  - Profile page
+  - Dev server running
+  - README.md created
+- ✅ **Phase 2: Authentication System**
+  - Supabase CLI installed
+  - Local Supabase instance running (Docker)
+  - PostgreSQL database created
+  - profiles table with RLS policies
+  - Auto-create profile trigger on signup
+  - Auth store with Zustand
+  - Registration flow (email/password/username)
+  - Login flow (email/password)
+  - Logout functionality
+  - Protected routes
+  - Dashboard with real user data
+  - Profile page with real stats
+  - Error handling and loading states
 
 ## In Progress
-- 🔄 Ready to start Phase 2 (Authentication System)
+- 🔄 Ready to start Phase 3 (Content Foundation)
 
 ## Blocked
 - None
+
+## Phase 2 Results
+- **Files created:** 11
+- **Lines added:** 811
+- **Supabase:** Running locally on Docker
+- **Database:** profiles table with 10 columns
+- **Auth:** Email/password working
+- **Protected routes:** Dashboard and Profile
+- **Git commits:** 5 total (2 new in Phase 2)
+
+## Services Running
+- **Dev server:** http://localhost:5173
+- **Supabase API:** http://127.0.0.1:54321
+- **Supabase Studio:** http://127.0.0.1:54323
+- **PostgreSQL:** postgresql://postgres:postgres@127.0.0.1:54322/postgres
+
+## Next Steps (Phase 3)
+1. Generate 500 Spanish-Russian flashcards
+2. Create decks table
+3. Create cards table
+4. Seed database with content
+5. Create deck library page
+6. Create deck detail page
+7. Test content display
+
+**Estimated time:** 1 day
 
 ## Decisions Made
 1. **Platform:** Web-first (PWA), native iOS in Phase 2
@@ -40,25 +80,7 @@
 5. **Gamification:** XP, Levels, Streaks, Achievements
 6. **Algorithm:** SM-2 spaced repetition (simplified Anki)
 7. **Timeline:** 8.5 days focused work for MVP
-
-## Phase 1 Results
-- **Files created:** 28
-- **Lines of code:** 3,744
-- **Dependencies installed:** 172 packages
-- **Dev server:** Running on port 5173
-- **Git commits:** 2 (planning + phase 1)
-
-## Next Steps (Phase 2)
-1. Create Supabase project
-2. Set up authentication (email/password)
-3. Create profiles table
-4. Implement registration flow
-5. Implement login flow
-6. Add protected routes
-7. Add logout functionality
-8. Test authentication end-to-end
-
-**Estimated time:** 1 day
+8. **Supabase:** Local development (Docker) for MVP, cloud later
 
 ## Open Questions
 - None (all requirements clarified)
@@ -77,3 +99,4 @@
 - Focus on clean, maintainable code with comments
 - Russian language support in UI (Phase 2)
 - Dev server accessible at http://localhost:5173
+- Supabase running locally (no cloud costs for MVP)
