@@ -58,13 +58,25 @@ export default function DashboardPage() {
         </div>
         
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-xl font-bold mb-4">Доступные колоды</h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-bold">Доступные колоды</h3>
+            <button
+              onClick={() => navigate('/decks')}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+            >
+              Смотреть все колоды →
+            </button>
+          </div>
           <p className="text-gray-600">
-            Колоды появятся в Phase 3 (Content Foundation)...
+            5 колод • 500 карточек • Испанский ↔ Русский
           </p>
-          <p className="text-sm text-gray-500 mt-2">
-            Следующий этап: создание 500 карточек испанский-русский
-          </p>
+          <div className="mt-4 flex gap-4">
+            <div className="text-4xl">🍕</div>
+            <div className="text-4xl">✈️</div>
+            <div className="text-4xl">🏠</div>
+            <div className="text-4xl">🎯</div>
+            <div className="text-4xl">⭐</div>
+          </div>
         </div>
       </div>
     </div>
